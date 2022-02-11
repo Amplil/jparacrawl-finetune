@@ -10,13 +10,13 @@ EXP_NAME=fine-tune
 SRC=ja
 TRG=en
 
-TRAIN_SRC=$PWD/corpus/spm/kyoto-train.$SRC
-TRAIN_TRG=$PWD/corpus/spm/kyoto-train.$TRG
-DEV_SRC=$PWD/corpus/spm/kyoto-dev.$SRC
-DEV_TRG=$PWD/corpus/spm/kyoto-dev.$TRG
-TEST_SRC=$PWD/corpus/spm/kyoto-test.$SRC
-TEST_TRG=$PWD/corpus/spm/kyoto-test.$TRG
-TEST_TRG_RAW=$PWD/corpus/kftt-data-1.0/data/orig/kyoto-test.$TRG
+TRAIN_SRC=$PWD/corpus/spm-law/law-corpus-train.$SRC
+TRAIN_TRG=$PWD/corpus/spm-law/law-corpus-train.$TRG
+DEV_SRC=$PWD/corpus/spm-law/law-corpus-dev.$SRC
+DEV_TRG=$PWD/corpus/spm-law/law-corpus-dev.$TRG
+TEST_SRC=$PWD/corpus/spm-law/law-corpus-test.$SRC
+TEST_TRG=$PWD/corpus/spm-law/law-corpus-test.$TRG
+TEST_TRG_RAW=$PWD/corpus/jaen-law/txt/law-corpus-test.$TRG
 
 SRC_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$SRC.txt
 TRG_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$TRG.txt
@@ -26,9 +26,9 @@ PRETRAINED_MODEL_FILE=$PWD/pretrained_model_$SRC$TRG/base.pretrain.pt
 
 SPM_MODEL=$PWD/corpus/enja_spm_models/spm.$TRG.nopretok.model
 
-CORPUS_DIR=$PWD/data
-MODEL_DIR=$PWD/models/$EXP_NAME
-DATA_DIR=$PWD/data-bin/$EXP_NAME
+CORPUS_DIR=$PWD/data-law
+MODEL_DIR=$PWD/models-law/$EXP_NAME
+DATA_DIR=$PWD/data-law-bin/$EXP_NAME
 
 TRAIN_PREFIX=$CORPUS_DIR/$EXP_NAME/train
 DEV_PREFIX=$CORPUS_DIR/$EXP_NAME/dev
@@ -93,6 +93,7 @@ python3 $FAIRSEQ/train.py $DATA_DIR \
     --ddp-backend no_c10d \
     --update-freq 32 \
     --seed $SEED \
+    --reset-optimizer \
 
 
 ######################################

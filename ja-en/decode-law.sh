@@ -8,9 +8,9 @@ EXP_NAME=decode
 SRC=ja
 TRG=en
 
-TEST_SRC=$PWD/corpus/spm/kyoto-test.$SRC
-TEST_TRG=$PWD/corpus/spm/kyoto-test.$TRG
-TEST_TRG_RAW=$PWD/corpus/kftt-data-1.0/data/orig/kyoto-test.$TRG
+TEST_SRC=$PWD/corpus/spm-law/law-corpus-test.$SRC
+TEST_TRG=$PWD/corpus/spm-law/law-corpus-test.$TRG
+TEST_TRG_RAW=$PWD/corpus/jaen-law/txt/law-corpus-test.$TRG
 
 SRC_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$SRC.txt
 TRG_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$TRG.txt
@@ -18,9 +18,9 @@ SPM_MODEL=$PWD/corpus/enja_spm_models/spm.$TRG.nopretok.model
 
 MODEL_FILE=$PWD/pretrained_model_$SRC$TRG/base.pretrain.pt
 
-CORPUS_DIR=$PWD/data
-DATA_DIR=$PWD/data-bin/$EXP_NAME
-OUT_DIR=$PWD/decode
+CORPUS_DIR=$PWD/data-law
+DATA_DIR=$PWD/data-law-bin/$EXP_NAME
+OUT_DIR=$PWD/decode-law
 
 TEST_PREFIX=$CORPUS_DIR/$EXP_NAME/test
 
@@ -55,11 +55,11 @@ B=`basename $TEST_SRC`
 python3 $FAIRSEQ/generate.py $DATA_DIR \
     --gen-subset test \
     --path $MODEL_FILE \
-    --max-tokens 1000 \
     --beam 6 \
     --lenpen 1.0 \
     --log-format simple \
     --remove-bpe \
+    --skip-invalid-size-inputs-valid-test \
     | tee $OUT_DIR/$B.hyp
 
 grep "^H" $OUT_DIR/$B.hyp | sed 's/^H-//g' | sort -n | cut -f3 > $OUT_DIR/$B.true
