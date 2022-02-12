@@ -8,9 +8,9 @@ EXP_NAME=decode
 SRC=ja
 TRG=en
 
-TEST_SRC=$PWD/corpus/spm/kyoto-test.$SRC
-TEST_TRG=$PWD/corpus/spm/kyoto-test.$TRG
-TEST_TRG_RAW=$PWD/corpus/kftt-data-1.0/data/orig/kyoto-test.$TRG
+TEST_SRC=$PWD/corpus/spm-sample/sample.$SRC
+TEST_TRG=$PWD/corpus/spm-sample/sample.$TRG
+TEST_TRG_RAW=$PWD/corpus/sample/sample.$TRG
 
 SRC_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$SRC.txt
 TRG_VOCAB=$PWD/pretrained_model_$SRC$TRG/dict.$TRG.txt
@@ -18,9 +18,9 @@ SPM_MODEL=$PWD/corpus/enja_spm_models/spm.$TRG.nopretok.model
 
 MODEL_FILE=$PWD/pretrained_model_$SRC$TRG/base.pretrain.pt
 
-CORPUS_DIR=$PWD/data
-DATA_DIR=$PWD/data-bin/$EXP_NAME
-OUT_DIR=$PWD/decode
+CORPUS_DIR=$PWD/data-sample
+DATA_DIR=$PWD/data-sample-bin/$EXP_NAME
+OUT_DIR=$PWD/decode-sample
 
 TEST_PREFIX=$CORPUS_DIR/$EXP_NAME/test
 
